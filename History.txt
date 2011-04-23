@@ -1,3 +1,0 @@
-== 1.0.0 2007-08-04
-
-* Initial release. Blog post on Jicksta.com at http://jicksta.com/articles/2007/08/05/the-methodphitamine

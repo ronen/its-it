@@ -7,13 +7,12 @@ require 'blankslate'
 #
 #   (1..10).select &it % 2 == 0
 # 
-# For more examples, see http://methodphitamine.rubyforge.org.
-module Methodphitamine
+module ItsIt
   
-  # The class instantiated by the it() and its() methods from monkey_patches.rb.
+  # The class instantiated by the <code>it</code> and <code>its</code> kernel methods.
   class It < BlankSlate
   
-    def initialize
+    def initialize #:nodoc:
       @methods = []
     end
     
@@ -30,23 +29,13 @@ module Methodphitamine
       end
     end
 
-    # Used for testing this class.
-    def methodphitamine_queue
+    # Used for testing.  This method is hidden but can be revealed using
+    #   ItsIt::It.reveal(:method_queue)
+    def method_queue
       @methods
     end
+    hide(:method_queue)
     
-  end
-  
-  class MethodphitamineMaybe < It
-    def to_proc
-      Proc.new do |obj|
-        @methods.inject(obj) do |current,(args,block)|
-          new_current = current.send(*args, &block)
-          return current unless new_current
-          new_current
-        end
-      end
-    end
   end
   
 end

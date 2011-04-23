@@ -1,0 +1,44 @@
+= its-it
+
+== Overview
+
+This gem defines kernel methods <code>its</code> and <code>it</code> that extend the Symbol#to_proc idiom to support chaining multiple methods.
+
+The pure Ruby way to chain methods when enumerating a list would be:
+
+        users.collect{|user| user.contact}.collect{|contact| contact.last_name}.collect{|name| name.capitalize}
+
+Using <code>Symbol#to_proc</code>, this becomes simpler:
+
+        users.collect(&:contact).collect(&:last_name).collect(&:capitalize)
+
+And using <code>its</code>, this becomes becomes simpler still:
+
+        users.collect(&its.contact.last_name.capitalize)
+
+<code>it</code> is an alias for <code>its</code>, to use with methods that
+describe actions rather than posessives. For example:
+
+        items.collect(&it.to_s.capitalize)
+
+== Installation
+
+Install from http://rubygems.org via
+
+        $ gem install "its-it"
+
+or in a Gemfile
+
+        gem "its-it"
+
+== Compatibility
+
+Tested with <b>ruby 1.8.7</b> and <b>ruby 1.9.2</b>
+
+== History
+
+This gem is a clone of Jay Philips'
+methodphitamine[https://github.com/jicksta/methodphitamine] gem, updated to
+be compatible with ruby 1.9.2 and gemspec, renamed its-it, and installed on
+rubygems.org[http://rubygems.org].  Unlike methodphitamine, this gem includes only
+<code>its</code> and <code>it</code>, not the "maybe" monad.

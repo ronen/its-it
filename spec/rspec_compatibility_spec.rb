@@ -1,6 +1,6 @@
-require File.dirname(__FILE__) + "/../lib/methodphitamine.rb"
+require File.dirname(__FILE__) + "/spec_helper"
 
-describe "The Methodphitamine's RSpec compatibility" do
+describe "The ItsIt's RSpec compatibility" do
   
   # Surprisingly, RSpec's it() method isn't even defined within the context
   # of each expectation block. Man, that's some crazy voodoo.
@@ -10,7 +10,7 @@ describe "The Methodphitamine's RSpec compatibility" do
     should respond_to(:its)
     method(:it).should == method(:its) # Ensure it's not RSpec's it() method
     lambda do
-      it.should be_kind_of(Methodphitamine::It)
+      it.should be_kind_of(ItsIt::It)
     end.should_not raise_error
   end
   
