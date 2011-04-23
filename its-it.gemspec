@@ -25,15 +25,22 @@ items.collect(&its.name.capitalize)
     "README.rdoc"
   ]
   s.files = [
+    ".document",
+    ".rspec",
+    "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
+    "VERSION",
+    "its-it.gemspec",
     "lib/its-it.rb",
     "lib/its-it/it.rb",
     "lib/its-it/kernel.rb",
     "lib/its-it/version.rb",
     "spec/it_spec.rb",
-    "spec/rspec_compatibility_spec.rb"
+    "spec/rspec_compatibility_spec.rb",
+    "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/ronen/its-it}
   s.licenses = ["MIT"]
@@ -51,6 +58,11 @@ items.collect(&its.name.capitalize)
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<its-it>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.3.0"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
+      s.add_development_dependency(%q<simplecov>, [">= 0"])
+      s.add_development_dependency(%q<simplecov-gem-adapter>, [">= 0"])
       s.add_development_dependency(%q<rspec>, ["~> 2.3.0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
@@ -79,6 +91,11 @@ items.collect(&its.name.capitalize)
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_dependency(%q<simplecov>, [">= 0"])
       s.add_dependency(%q<simplecov-gem-adapter>, [">= 0"])
+      s.add_dependency(%q<rspec>, ["~> 2.3.0"])
+      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
+      s.add_dependency(%q<simplecov>, [">= 0"])
+      s.add_dependency(%q<simplecov-gem-adapter>, [">= 0"])
       s.add_dependency(%q<blankslate>, [">= 0"])
       s.add_dependency(%q<rspec>, ["~> 2.3.0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
@@ -88,6 +105,11 @@ items.collect(&its.name.capitalize)
     end
   else
     s.add_dependency(%q<its-it>, [">= 0"])
+    s.add_dependency(%q<rspec>, ["~> 2.3.0"])
+    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
+    s.add_dependency(%q<simplecov>, [">= 0"])
+    s.add_dependency(%q<simplecov-gem-adapter>, [">= 0"])
     s.add_dependency(%q<rspec>, ["~> 2.3.0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
