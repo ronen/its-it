@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.name = 'its-it'
   s.version = ItsIt::VERSION
   s.platform = Gem::Platform::RUBY
-  s.date = '2011-04-23'
+  s.date = "2011-04-23"
   s.authors = ['Ronen Barzel']
   s.email = 'ronen@barzel.org'
   s.homepage = 'http://github.com/ronen/its-it'
