@@ -14,5 +14,5 @@ doc
 # jeweler generated
 pkg
 
-# don't commit Gitfile.lock for gems
-Gitfile.lock
+# don't commit Gemfile.lock for gems
+Gemfile.lock
