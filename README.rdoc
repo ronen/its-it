@@ -2,7 +2,14 @@
 
 == Overview
 
-This gem defines kernel methods <code>its</code> and <code>it</code> that extend the Symbol#to_proc idiom to support chaining multiple methods.
+This gem defines kernel methods <code>its</code> and <code>it</code> that
+queue and defer method calls. This is handy for list enumeration and case
+statements.
+
+== List Enumeration
+
+<code>its</code> and <code>it</code> extend the Symbol#to_proc idiom to
+support chaining multiple methods.
 
 The pure Ruby way to chain methods when enumerating a list would be:
 
@@ -16,10 +23,65 @@ And using <code>its</code>, this becomes becomes simpler still:
 
         users.collect(&its.contact.last_name.capitalize)
 
+Note that <code>its</code> captures arguments and blocks, allowing constructs like this,
+which will select users whose names include any non-hyphenated word that's more than 10
+letters long:
+        users.select(&its.name.split(/ /).reject{|word| word =~ /-/}.collect(&:length).max > 10)
+
 <code>it</code> is an alias for <code>its</code>, to use with methods that
 describe actions rather than posessives. For example:
 
         items.collect(&it.to_s.capitalize)
+
+== Case statements
+
+<code>its</code> and <code>it</code> likewise extend Ruby's
+<code>code</code> statement to support testing arbitrary methods,
+minimizing the need to create temporary variables and use
+<code>if-elsif</code> constructs.
+
+In pure Ruby, doing comparisons on computed values would be done something
+like this:
+
+        maxlen = arrays.collect(&size).max
+        if maxlen > 10000
+            "too big"
+        elsif maxlen < 10
+            "too small"
+        else
+            "okay"
+        end
+
+But using <code>it</code> this becomes:
+
+        case arrays.collect(&size).max
+        when it > 1000
+            "too big"
+        when it < 10
+            "too small"
+        else
+            "okay"
+        end
+
+Of course method chanining can be used here too:
+
+        case users.first
+        when its.name == "Gimme Cookie" then ...
+        when its.name.length > 10 then ...
+        else ...
+        end
+
+== Under the hood
+
+The <code>ItsIt::It</code> class starts from <code>BlankSlate</code>, and
+uses <code>method_missing</code> to capture and queue up all methods and
+their arguments, with the exception of <code>:to_proc</code> and <code>:===</code>
+(and also excepting <code>:respond_to? :to_proc</code> and
+<code>:respond_to? :===</code>).
+
+<code>:to_proc</code> returns a proc that will evaluate the method queue on
+a given argument.  <code>:===</code> takes an argument and evaluates that
+proc, returning the result.
 
 == Installation
 
@@ -37,8 +99,9 @@ Tested with <b>ruby 1.8.7</b> and <b>ruby 1.9.2</b>
 
 == History
 
-This gem is a clone of Jay Philips'
-methodphitamine[https://github.com/jicksta/methodphitamine] gem, updated to
-be compatible with ruby 1.9.2 and gemspec, renamed its-it, and installed on
-rubygems.org[http://rubygems.org].  Unlike methodphitamine, this gem includes only
-<code>its</code> and <code>it</code>, not the "maybe" monad.
+This gem is orignally based on Jay Philips'
+methodphitamine[https://github.com/jicksta/methodphitamine] gem. It has
+been updated to be compatible with ruby 1.9.2 and gemspec, renamed its-it,
+and installed on rubygems.org[http://rubygems.org].  Unlike
+methodphitamine, this gem includes only <code>its</code> and
+<code>it</code>, not the "maybe" monad.

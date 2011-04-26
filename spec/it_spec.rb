@@ -47,8 +47,27 @@ describe "An It instance" do
   it "should respond to to_proc()" do
     @it.should respond_to(:to_proc)
   end
+
+  it "should respond to ===" do
+    @it.should respond_to(:===)
+  end
+
+  it "should work in a case statement" do
+    [0,1,2].each do |i|
+      case i
+      when it < 1 then i.should == 0
+      when it == 1 then i.should == 1
+      else i.should == 2
+      end
+    end
+  end
   
   it "should not queue the method respond_to? when given :to_proc as an arg" do
+    @it.respond_to? :to_proc
+    @it.method_queue.should be_empty
+  end
+
+  it "should not queue the method respond_to? when given :=== as an arg" do
     @it.respond_to? :to_proc
     @it.method_queue.should be_empty
   end

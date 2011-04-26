@@ -9,15 +9,17 @@ Gem::Specification.new do |s|
   s.authors = ['Ronen Barzel']
   s.email = 'ronen@barzel.org'
   s.homepage = 'http://github.com/ronen/its-it'
-  s.summary = %q{Defines its() and it() method-chain proc proxies.}
+  s.summary = %q{Defines its() and it() method-chain proxies.}
   s.description = %q{
-This gem defines the Kernel method "it", which extends the Symbol#to_proc
-idiom to support chaining multiple methods.  For example,
-items.collect(&it.to_s.capitalize).  The method is also aliased as "its",
-for methods that describe possessives rather than actions, such as
-items.collect(&its.name.capitalize)
+This gem defines the Kernel method "it" that queue and defer method calls.
+This extends the Symbol#to_proc idiom to support chaining multiple methods.
+For example, items.collect(&it.to_s.capitalize).  This also allows
+conditionals in case statements, such as: case ... when it > 3 then [etc.].
+The method is also aliased as "its", for methods that describe possessives
+rather than actions, such as items.collect(&its.name.capitalize)
 
-[This gem is clone of Jay Philips' "methodphitamine" gem, updated for ruby 1.9 and gemspec compatibility.]
+[This gem is an extension of Jay Philips' "methodphitamine" gem, updated
+for ruby 1.9 and gemspec compatibility and adding the case statement functionality.]
 }
   s.extra_rdoc_files = [
     "LICENSE.txt",

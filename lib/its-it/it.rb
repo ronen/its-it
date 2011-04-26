@@ -17,7 +17,7 @@ module ItsIt
     end
     
     def method_missing(*args, &block)
-      @methods << [args, block] unless args == [:respond_to?, :to_proc]
+      @methods << [args, block] unless args.first == :respond_to? and [:to_proc, :===].include?(args[1])
       self
     end
   
@@ -27,6 +27,10 @@ module ItsIt
           current.send(*args, &block)
         end
       end
+    end
+
+    def ===(obj)
+      to_proc.call(obj)
     end
 
     # Used for testing.  This method is hidden but can be revealed using
