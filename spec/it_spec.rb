@@ -2,54 +2,51 @@ require File.dirname(__FILE__) + "/spec_helper"
 
 describe "An It instance" do
 
-  before :all do
-    ItsIt::It.reveal(:method_queue)
+  before (:each) do
+    it = ItsIt::It.new
+    @string = "This is a test"
+  end
+
+  it "should start with identity via to_proc" do
+    it.to_proc.call(@string).should == @string
+  end
+
+  it "should start with identity via ===" do
+    (it === @string).should == @string
+  end
+
+  it "should work with a simple method via to_proc" do
+    (it.length).to_proc.call(@string).should == @string.length
+  end
+
+  it "should work with a simple methoud using ===" do
+    ((it.length) === @string).should == @string.length
   end
   
-  before:each do
-    @it = ItsIt::It.new
+  it "should work with arguments" do
+    (it.sub(/test/, 'kumquat')).call(@string).should == 'This is a kumquat'
   end
   
-  it "should queue a single simple method" do
-    @it.foo
-    queue = @it.method_queue
-    queue.size.should == 1
-    queue.first.size.should == 2
-    queue.first.last.should be_nil # No block, ergo nil
+  it "should work with a block" do
+    (it.sub(/test/) {"balloon"}).to_proc.call(@string).should == 'This is a balloon'
   end
   
-  it "should store arguments" do
-    @it.bar(:qaz, :qwerty)
-    @it.method_queue.first.should == [[:bar, :qaz, :qwerty], nil]
-  end
-  
-  it "should store a block" do
-    @it.map { }
-    @it.method_queue.first.last.should be_kind_of(Proc)
-  end
-  
-  it "should allow chaining blocks" do
-    @it.map {}.inject {}.select {}.sexypants {}
-    blocks = @it.method_queue.map { |x| x.last }
-    blocks.size.should == 4
-    blocks.each do |block|
-      block.should be_kind_of(Proc)
-    end
-  end
-  
-  it "should queue many methods in the right order" do
-    @it.a.b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q.r.s.t.u.v.w.x.y.z
-    queue = @it.method_queue
-    queue.size.should == 26
-    queue.map { |x| x.first.first.to_s }.should == ('a'..'z').to_a
+  it "should chain methods" do
+    it.reverse.swapcase.succ.should == "TSET A SI SIHu"
   end
   
   it "should respond to to_proc()" do
-    @it.should respond_to(:to_proc)
+    it.should respond_to(:to_proc)
   end
 
   it "should respond to ===" do
-    @it.should respond_to(:===)
+    it.should respond_to(:===)
+  end
+
+  it "should work with numbers" do
+    ((it < 1) === 0).should be_true
+    ((it < 1) === 1).should be_false
+    ((it < 1) === 2).should be_false
   end
 
   it "should work in a case statement" do
@@ -63,13 +60,15 @@ describe "An It instance" do
   end
   
   it "should not queue the method respond_to? when given :to_proc as an arg" do
-    @it.respond_to? :to_proc
-    @it.method_queue.should be_empty
+    (it.respond_to? :to_proc).should be_true
   end
 
   it "should not queue the method respond_to? when given :=== as an arg" do
-    @it.respond_to? :to_proc
-    @it.method_queue.should be_empty
+    (it.respond_to? :===).should be_true
+  end
+
+  it "should queue the method respond_to? when given generic arg" do
+    (it.respond_to? :size).to_proc.call(@string).should be_true
   end
   
 end

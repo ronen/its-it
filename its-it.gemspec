@@ -35,7 +35,6 @@ for ruby 1.9 and gemspec compatibility and adding the case statement functionali
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ['lib']
 
-  s.add_runtime_dependency 'blankslate'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'bueller'
