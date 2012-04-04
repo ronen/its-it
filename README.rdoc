@@ -106,3 +106,5 @@ statement support, renamed its-it, and installed on
 rubygems.org[http://rubygems.org].  Unlike methodphitamine, this gem
 includes only <code>its</code> and <code>it</code>, not the "maybe" monad.
 
+Release Notes
+* 1.1.1 Remove dependency on BlankSlate
