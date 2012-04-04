@@ -95,13 +95,14 @@ or in a Gemfile
 
 == Compatibility
 
-Tested with <b>ruby 1.8.7</b> and <b>ruby 1.9.2</b>
+Works with MRI ruby 1.8.7, 1.9.2, 1.9.3
 
 == History
 
 This gem is orignally based on Jay Philips'
 methodphitamine[https://github.com/jicksta/methodphitamine] gem. It has
-been updated to be compatible with ruby 1.9.2 and gemspec, renamed its-it,
-and installed on rubygems.org[http://rubygems.org].  Unlike
-methodphitamine, this gem includes only <code>its</code> and
-<code>it</code>, not the "maybe" monad.
+been updated to be compatible with ruby 1.9 and gemspec, added case
+statement support, renamed its-it, and installed on
+rubygems.org[http://rubygems.org].  Unlike methodphitamine, this gem
+includes only <code>its</code> and <code>it</code>, not the "maybe" monad.
+
