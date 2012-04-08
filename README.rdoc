@@ -36,7 +36,7 @@ describe actions rather than posessives. For example:
 == Case statements
 
 <code>its</code> and <code>it</code> likewise extend Ruby's
-<code>code</code> statement to support testing arbitrary methods,
+<code>case</code> statement to support testing arbitrary methods,
 minimizing the need to create temporary variables and use
 <code>if-elsif</code> constructs.
 
@@ -73,11 +73,10 @@ Of course method chanining can be used here too:
 
 == Under the hood
 
-The <code>ItsIt::It</code> class starts from <code>BlankSlate</code>, and
-uses <code>method_missing</code> to capture and queue up all methods and
-their arguments, with the exception of <code>:to_proc</code> and <code>:===</code>
-(and also excepting <code>:respond_to? :to_proc</code> and
-<code>:respond_to? :===</code>).
+The <code>ItsIt::It</code> class uses <code>method_missing</code> to
+capture and queue up all methods and their arguments, with the exception of
+<code>:to_proc</code> and <code>:===</code> (and also excepting
+<code>:respond_to? :to_proc</code> and <code>:respond_to? :===</code>).
 
 <code>:to_proc</code> returns a proc that will evaluate the method queue on
 a given argument.  <code>:===</code> takes an argument and evaluates that
