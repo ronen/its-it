@@ -38,7 +38,6 @@ for ruby 1.9 and gemspec compatibility and adding the case statement functionali
   s.add_development_dependency 'rdoc'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'bundler'
-  s.add_development_dependency 'bueller'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'simplecov-gem-adapter'
 
