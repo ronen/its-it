@@ -6,7 +6,9 @@
 This gem defines kernel methods `its` and `it` that queue and defer method
 calls. This is handy for list enumeration and case statements.
 
-[<img src="https://secure.travis-ci.org/ronen/its-it.png"/>](http://travis-ci.org/ronen/its-it)[<img src="https://gemnasium.com/ronen/its-it.png" alt="Dependency Status" />](https://gemnasium.com/ronen/its-it)
+[![Gem Version](https://badge.fury.io/rb/its-it.png)](http://badge.fury.io/rb/its-it)
+[![Build Status](https://secure.travis-ci.org/ronen/its-it.png)](http://travis-ci.org/ronen/its-it)
+[![Dependency Status](https://gemnasium.com/ronen/its-it.png)](https://gemnasium.com/ronen/its-it)
 
 ## List Enumeration
 
@@ -98,6 +100,10 @@ Works with MRI ruby 1.8.7, 1.9.3, 2.0.0
 
 ## History
 
+Release Notes
+
+*   1.1.1 Remove dependency on BlankSlate
+
 This gem is orignally based on Jay Philips'
 [methodphitamine](https://github.com/jicksta/methodphitamine) gem. It has been
 updated to be compatible with ruby 1.9 and gemspec, added case statement
@@ -105,6 +111,4 @@ support, renamed its-it, and installed on [rubygems.org](http://rubygems.org).
  Unlike methodphitamine, this gem includes only `its` and `it`, not the
 "maybe" monad.
 
-Release Notes
-*   1.1.1 Remove dependency on BlankSlate
 
