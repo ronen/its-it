@@ -30,6 +30,7 @@ And using `its`, this becomes becomes simpler still:
 Note that `its` captures arguments and blocks, allowing constructs like this,
 which will select users whose names include any non-hyphenated word that's
 more than 10 letters long:
+
     users.select(&its.name.split(/ /).reject{|word| word =~ /-/}.collect(&:length).max > 10)
 
 `it` is an alias for `its`, to use with methods that describe actions rather
