@@ -94,7 +94,7 @@ or in a Gemfile
 
 ## Compatibility
 
-Works with MRI ruby 1.8.7, 1.9.2, 1.9.3
+Works with MRI ruby 1.8.7, 1.9.3, 2.0.0
 
 ## History
 
