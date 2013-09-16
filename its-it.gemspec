@@ -23,7 +23,6 @@ for ruby 1.9 and gemspec compatibility and adding the case statement functionali
 }
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.rdoc"
   ]
 
   s.required_rubygems_version = Gem::Requirement.new('>= 1.3.7')
