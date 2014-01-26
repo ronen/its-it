@@ -113,3 +113,7 @@ support, renamed its-it, and installed on [rubygems.org](http://rubygems.org).
 "maybe" monad.
 
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ronen/its-it/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
