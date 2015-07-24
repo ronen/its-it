@@ -6,13 +6,13 @@ describe "RSpec compatibility" do
   # of each expectation block. Man, that's some crazy voodoo.
   
   it "should make available the it and its methods" do
-    method(:it).should == method(:its) # Ensure it's not RSpec's it() method
-    lambda do
+    expect(method(:it)).to eq method(:its) # Ensure it's not RSpec's it() method
+    expect {
       it.should be_kind_of(ItsIt::It)
-    end.should_not raise_error
+    }.to_not raise_error
   end
   
-  it "should work with RSpec's assertion methods" do
+  it "should work with RSpec's old :should syntax" do
     [1,2,3].each &it.should(be_kind_of(Fixnum))
   end
 end
