@@ -17,34 +17,41 @@ methods.
 
 The pure Ruby way to chain methods when iterating through a list would be:
 
-    users.map{|user| user.contact}.map{|contact| contact.last_name}.map{|name| name.capitalize}
+```ruby
+users.map{|user| user.contact}.map{|contact| contact.last_name}.map{|name| name.capitalize}
+```
 
 Using `Symbol#to_proc`, this becomes simpler (at the cost of generating intermediate arrays):
 
-    users.map(&:contact).map(&:last_name).map(&:capitalize)
+```ruby
+users.map(&:contact).map(&:last_name).map(&:capitalize)
+```
 
 And using `its`, this becomes becomes simpler still:
 
-    users.map(&its.contact.last_name.capitalize)
+```ruby
+users.map(&its.contact.last_name.capitalize)
+```
 
 Note that `its` captures arguments and blocks, allowing you to do things like
 
 ```ruby
-    users.map(&its.contact.last_name[0,3].capitalize)
+users.map(&its.contact.last_name[0,3].capitalize)
 ```
 
 or
 
+```ruby
+users.select(&its.addresses.any? { |address| airline.flies_to address.city })
 ```
-    users.select(&its.addresses.any? { |address| airline.flies_to address.city })
-```
-
 
 
 `it` is an alias for `its`, to use with methods that describe actions rather
 than posessives. For example:
 
-    items.map(&it.to_s.capitalize)
+```ruby
+items.map(&it.to_s.capitalize)
+```
 
 ## Case statements
 
@@ -55,33 +62,39 @@ arbitrary methods, minimizing the need to create temporary variables and use
 In pure Ruby, doing comparisons on computed values would be done something
 like this:
 
-    maxlen = arrays.map(&size).max
-    if maxlen > 10000
-        "too big"
-    elsif maxlen < 10
-        "too small"
-    else
-        "okay"
-    end
+```ruby
+maxlen = arrays.map(&size).max
+if maxlen > 10000
+    "too big"
+elsif maxlen < 10
+    "too small"
+else
+    "okay"
+end
+```
 
 But using `it` this becomes:
 
-    case arrays.map(&size).max
-    when it > 1000
-        "too big"
-    when it < 10
-        "too small"
-    else
-        "okay"
-    end
+```ruby
+case arrays.map(&size).max
+when it > 1000
+    "too big"
+when it < 10
+    "too small"
+else
+    "okay"
+end
+```
 
 Of course method chanining can be used here too:
 
-    case users.first
-    when its.name == "Gimme Cookie" then ...
-    when its.name.length > 10 then ...
-    else ...
-    end
+```ruby
+case users.first
+when its.name == "Gimme Cookie" then ...
+when its.name.length > 10 then ...
+else ...
+end
+```
 
 ## Under the hood
 
@@ -95,13 +108,17 @@ result.
 
 ## Installation
 
-Install from http://rubygems.org via
+Install as usual from http://rubygems.org via
 
-    $ gem install "its-it"
+```bash
+$ gem install "its-it"
+```
 
 or in a Gemfile
 
-    gem "its-it"
+```ruby
+gem "its-it"
+```
 
 ## Compatibility
 
