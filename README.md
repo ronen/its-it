@@ -4,39 +4,47 @@
 ## Overview
 
 This gem defines kernel methods `its` and `it` that queue and defer method
-calls. This is handy for list enumeration and case statements.
+calls. This is handy for list comprehension and case statements.
 
 [![Gem Version](https://badge.fury.io/rb/its-it.png)](http://badge.fury.io/rb/its-it)
 [![Build Status](https://secure.travis-ci.org/ronen/its-it.png)](http://travis-ci.org/ronen/its-it)
 [![Dependency Status](https://gemnasium.com/ronen/its-it.png)](https://gemnasium.com/ronen/its-it)
 
-## List Enumeration
+## List Comprehension
 
 `its` and `it` extend the Symbol#to_proc idiom to support chaining multiple
 methods.
 
-The pure Ruby way to chain methods when enumerating a list would be:
+The pure Ruby way to chain methods when iterating through a list would be:
 
-    users.collect{|user| user.contact}.collect{|contact| contact.last_name}.collect{|name| name.capitalize}
+    users.map{|user| user.contact}.map{|contact| contact.last_name}.map{|name| name.capitalize}
 
-Using `Symbol#to_proc`, this becomes simpler:
+Using `Symbol#to_proc`, this becomes simpler (at the cost of generating intermediate arrays):
 
-    users.collect(&:contact).collect(&:last_name).collect(&:capitalize)
+    users.map(&:contact).map(&:last_name).map(&:capitalize)
 
 And using `its`, this becomes becomes simpler still:
 
-    users.collect(&its.contact.last_name.capitalize)
+    users.map(&its.contact.last_name.capitalize)
 
-Note that `its` captures arguments and blocks, allowing constructs like this,
-which will select users whose names include any non-hyphenated word that's
-more than 10 letters long:
+Note that `its` captures arguments and blocks, allowing you to do things like
 
-    users.select(&its.name.split(/ /).reject{|word| word =~ /-/}.collect(&:length).max > 10)
+```ruby
+    users.map(&its.contact.last_name[0,3].capitalize)
+```
+
+or
+
+```
+    users.select(&its.addresses.any? { |address| airline.flies_to address.city })
+```
+
+
 
 `it` is an alias for `its`, to use with methods that describe actions rather
 than posessives. For example:
 
-    items.collect(&it.to_s.capitalize)
+    items.map(&it.to_s.capitalize)
 
 ## Case statements
 
@@ -47,7 +55,7 @@ arbitrary methods, minimizing the need to create temporary variables and use
 In pure Ruby, doing comparisons on computed values would be done something
 like this:
 
-    maxlen = arrays.collect(&size).max
+    maxlen = arrays.map(&size).max
     if maxlen > 10000
         "too big"
     elsif maxlen < 10
@@ -58,7 +66,7 @@ like this:
 
 But using `it` this becomes:
 
-    case arrays.collect(&size).max
+    case arrays.map(&size).max
     when it > 1000
         "too big"
     when it < 10
@@ -97,7 +105,7 @@ or in a Gemfile
 
 ## Compatibility
 
-Works with MRI ruby 1.8.7, 1.9.3, 2.0.0
+Tested on MRI ruby 1.8.7, 1.9.3, 2.0.0 and 2.2.3
 
 ## History
 
@@ -111,9 +119,4 @@ updated to be compatible with ruby 1.9 and gemspec, added case statement
 support, renamed its-it, and installed on [rubygems.org](http://rubygems.org).
  Unlike methodphitamine, this gem includes only `its` and `it`, not the
 "maybe" monad.
-
-
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ronen/its-it/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
