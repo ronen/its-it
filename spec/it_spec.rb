@@ -47,7 +47,7 @@ describe ItsIt::It do
   end
 
   it "should work with hashes (multiple args)" do
-    expect({a: 1, b:2}.select &it[1] == 2).to eq({b:2})
+    expect({:a => 1, :b => 2}.select &it[1] == 2).to eq({:b => 2})
   end
 
 
