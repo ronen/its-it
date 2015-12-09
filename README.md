@@ -128,13 +128,16 @@ gem "its-it"
 
 ## Compatibility
 
-Tested on MRI ruby 1.8.7, 1.9.3, 2.0.0 and 2.2.3
+Tested on MRI ruby 1.9.3, 2.0.0 and 2.2.3
+
+(MRI ruby 1.8.7 was supported up through version 1.1.1)
 
 ## History
 
 Release Notes
 
-*   1.1.1 Remove dependency on BlankSlate
+* 1.2.0 Add support for Hash comprehensions; drop support for ruby 1.8.7
+* 1.1.1 Remove dependency on BlankSlate
 
 This gem is orignally based on Jay Philips'
 [methodphitamine](https://github.com/jicksta/methodphitamine) gem. It has been
