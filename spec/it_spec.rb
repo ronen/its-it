@@ -46,6 +46,11 @@ describe ItsIt::It do
     expect((it < 1) === 2).to be_falsey
   end
 
+  it "should work with hashes (multiple args)" do
+    expect({a: 1, b:2}.select &it[1] == 2).to eq({b:2})
+  end
+
+
   it "should work in a case statement" do
     [0,1,2].each do |i|
       case i

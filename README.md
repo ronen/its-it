@@ -53,6 +53,12 @@ than posessives. For example:
 items.map(&it.to_s.capitalize)
 ```
 
+When used with hash comprehensions, the `|key, val|` pair of arguments are presented to `its` as an array.  E.g.
+
+```ruby
+{dogs: 1, cats: 2, goats:3}.select &it[1].even? # => {cats: 2}
+```
+
 ## Case statements
 
 `its` and `it` likewise extend Ruby's `case` statement to support testing

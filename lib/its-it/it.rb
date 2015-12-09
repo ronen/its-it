@@ -17,20 +17,18 @@ module ItsIt
     end
   
     def initialize #:nodoc:
-      @methods = []
+      @queue = []
     end
     
-    def method_missing(*args, &block)
-      @methods << [args, block] unless args.first == :respond_to? and [:to_proc, :===].include?(args[1].to_sym)
+    def method_missing(method, *args, &block)
+      @queue << [method, args, block] unless method == :respond_to? and [:to_proc, :===].include?(args.first.to_sym)
       self
     end
 
     def to_proc
-      Kernel.send :lambda do |obj|
-        ret = @methods.inject(obj) do |current,(args,block)|
-          current.send(*args, &block)
-        end
-        ret
+      Kernel.send :proc do |*obj|
+        obj = obj.shift if obj.size == 1
+        @queue.inject(obj) { |chain,(method, args,block)| chain.send(method, *args, &block) }
       end
     end
 
