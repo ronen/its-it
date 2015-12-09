@@ -15,80 +15,80 @@ calls. This is handy for list comprehension and case statements.
 `its` and `it` extend the Symbol#to_proc idiom to support chaining multiple
 methods.
 
-The pure Ruby way to chain methods when iterating through a list would be:
+When performing a list comprehension ruby, you can use a block argument:
+
 
 ```ruby
-users.map{|user| user.contact}.map{|contact| contact.last_name}.map{|name| name.capitalize}
+users.map{ |user| user.contact }
 ```
 
-Using `Symbol#to_proc`, this becomes simpler (at the cost of generating intermediate arrays):
+Or, to avoid needing the block and and extra parameter, you can use the `Symbol#to_proc` shortcut:
+
+```ruby
+users.map &:contact
+```
+
+But if you want to chain several methods, such as:
+
+```ruby
+users.map{ |user| user.contact.last_name.capitalize }
+```
+
+The `Symbol#to_proc` shortcut doesn't help much.  At best, if you're willing to accept intermediate arrays, you can do:
 
 ```ruby
 users.map(&:contact).map(&:last_name).map(&:capitalize)
 ```
 
-And using `its`, this becomes becomes simpler still:
+To improve the situation, this gem provides a Kernel method `its`, which lets you get the same shortcut advantages as `Symbol#to_proc` but supports chaining:
 
 ```ruby
-users.map(&its.contact.last_name.capitalize)
+users.map &its.contact.last_name.capitalize
 ```
 
-Note that `its` captures arguments and blocks, allowing you to do things like
+Also, `its` supports arguments and blocks, allowing you to do things like
 
 ```ruby
-users.map(&its.contact.last_name[0,3].capitalize)
-```
-
-or
-
-```ruby
+users.map &its.contact.last_name[0,3].capitalize
+users.select &its.contact.last_name.length > 10
 users.select(&its.addresses.any? { |address| airline.flies_to address.city })
 ```
 
-
-`it` is an alias for `its`, to use with methods that describe actions rather
-than posessives. For example:
+As a syntactic sugar, `it` is an alias for `its`, to use with methods that describe actions rather than posessives. For example:
 
 ```ruby
-items.map(&it.to_s.capitalize)
+items.map &it.to_s.capitalize
 ```
+
+### Hash comprehensions
 
 When used with hash comprehensions, the `|key, val|` pair of arguments are presented to `its` as an array.  E.g.
 
 ```ruby
-{dogs: 1, cats: 2, goats:3}.select &it[1].even? # => {cats: 2}
+{dogs: 1, cats: 2, goats:3}.select &its[1].even? # => {cats: 2}
 ```
 
 ## Case statements
 
-`its` and `it` likewise extend Ruby's `case` statement to support testing
-arbitrary methods, minimizing the need to create temporary variables and use
-`if-elsif` constructs.
-
-In pure Ruby, doing comparisons on computed values would be done something
-like this:
+`its` and `it` similarly extend Ruby's `case` mechanism to support testing
+arbitrary methods, minimizing the need to create temporary variables.  That is, instead of:
 
 ```ruby
 maxlen = arrays.map(&size).max
-if maxlen > 10000
-    "too big"
-elsif maxlen < 10
-    "too small"
-else
-    "okay"
+case
+when maxlen > 10000 then "too big"
+when maxlen < 10    then "too small"
+else                     "okay"
 end
 ```
 
-But using `it` this becomes:
+You can use `it`:
 
 ```ruby
 case arrays.map(&size).max
-when it > 1000
-    "too big"
-when it < 10
-    "too small"
-else
-    "okay"
+when it > 1000 then "too big"
+when it < 10   then "too small"
+else                "okay"
 end
 ```
 
@@ -104,8 +104,8 @@ end
 
 ## Under the hood
 
-The `ItsIt::It` class uses `method_missing` to capture and queue up all
-methods and their arguments, with the exception of `:to_proc` and `:===` (and
+The `it` method creates an instance of the class `ItsIt::It` class, which uses `method_missing` to capture and queue up all
+methods and their arguments except for `:to_proc` and `:===` (and
 also excepting `:respond_to? :to_proc` and `:respond_to? :===`).
 
 `:to_proc` returns a proc that will evaluate the method queue on a given
