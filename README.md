@@ -104,7 +104,7 @@ end
 
 ## Under the hood
 
-The `it` method creates an instance of the class `ItsIt::It` class, which uses `method_missing` to capture and queue up all
+The `it` method creates an instance of the `ItsIt::It` class, which uses `method_missing` to capture and queue up all
 methods and their arguments except for `:to_proc` and `:===` (and
 also excepting `:respond_to? :to_proc` and `:respond_to? :===`).
 
