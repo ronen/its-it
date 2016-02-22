@@ -136,6 +136,7 @@ Tested on MRI ruby 1.9.3, 2.0.0 and 2.2.3
 
 Release Notes
 
+* 1.2.1 Don't leak all of ItsIt into main, just ItsIt::Kernel.  Thanks to [klg](https://github.com/kjg)
 * 1.2.0 Add support for Hash comprehensions; drop support for ruby 1.8.7
 * 1.1.1 Remove dependency on BlankSlate
 
