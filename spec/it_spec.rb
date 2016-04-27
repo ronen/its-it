@@ -19,19 +19,19 @@ describe ItsIt::It do
   it "should work with a simple method using ===" do
     expect((it.length) === TestString).to eq(TestString.length)
   end
-  
+
   it "should work with arguments" do
     expect((it.sub(/test/, 'kumquat')).call(TestString)).to eq('This is a kumquat')
   end
-  
+
   it "should work with a block" do
     expect((it.sub(/test/) {"balloon"}).to_proc.call(TestString)).to eq('This is a balloon')
   end
-  
+
   it "should chain methods" do
     expect(it.reverse.swapcase.succ).to eq("TSET A SI SIHu")
   end
-  
+
   it "should respond to to_proc()" do
     expect(it).to respond_to(:to_proc)
   end
@@ -60,7 +60,7 @@ describe ItsIt::It do
       end
     end
   end
-  
+
   it "should not queue the method respond_to? when given :to_proc as an arg" do
     expect(it.respond_to? :to_proc).to be_true
   end
@@ -73,4 +73,8 @@ describe ItsIt::It do
     expect((it.respond_to? :size).to_proc.call(TestString)).to be_truthy
   end
 
+  it "should return a string when method to_s is called" do
+    # NOTE: this is supposed to fail
+    expect(it.to_s).to be_a(String)
+  end
 end
