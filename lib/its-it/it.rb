@@ -1,5 +1,3 @@
-#require 'blankslate' unless defined? BasicObject
-
 # This module contains an It class which queues any methods called on it
 # and can be converted into a Proc. The Proc it generates executes the queued
 # methods in the order received on the argument passed to the block, allowing
@@ -10,7 +8,7 @@
 module ItsIt
 
   # The class instantiated by the <code>it</code> and <code>its</code> kernel methods.
-  class It < (defined?(BasicObject) ? BasicObject : Object)
+  class It < BasicObject
 
     instance_methods.map(&:to_s).each do |method|
       undef_method method unless method.start_with? "__"
