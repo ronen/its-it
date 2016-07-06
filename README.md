@@ -62,9 +62,11 @@ items.map &it.to_s.capitalize
 
 ### Hash comprehensions
 
-When used with hash comprehensions, the `|key, val|` pair of arguments are presented to `its` as an array.  E.g.
+When used with hash comprehensions, the `|key, val|` pair of arguments are presented to `its` as a tuple that can be accessed array-like via `[0]` or `[1]` and/or struct-like via `#key` and `#val` methods.  E.g.
 
 ```ruby
+{dogs: 1, cats: 2, goats:3}.select &its.key =~ /^c/ # => {cats: 2}
+{dogs: 1, cats: 2, goats:3}.select &its.val.even? # => {cats: 2}
 {dogs: 1, cats: 2, goats:3}.select &its[1].even? # => {cats: 2}
 ```
 

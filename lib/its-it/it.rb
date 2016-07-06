@@ -25,9 +25,21 @@ module ItsIt
       self
     end
 
+    module KeyValAccessors
+      def key
+        self[0]
+      end
+      def val
+        self[1]
+      end
+    end
+
     def to_proc
       Kernel.send :proc do |*obj|
-        obj = obj.shift if obj.size == 1
+        case obj.size
+        when 1 then obj = obj.shift     # array comprehension, gets one arg
+        when 2 then obj.extend(KeyValAccessors) # hash comprehension, gets two args
+        end
         @queue.inject(obj) { |chain,(method, args,block)| chain.send(method, *args, &block) }
       end
     end

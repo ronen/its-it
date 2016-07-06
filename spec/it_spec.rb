@@ -46,8 +46,18 @@ describe ItsIt::It do
     expect((it < 1) === 2).to be_falsey
   end
 
-  it "should work with hashes (multiple args)" do
-    expect({a: 1, b:2}.select &it[1] == 2).to eq({b:2})
+  context "hash comprehension" do
+    it "presents element as an array" do
+      expect({a: 1, b:2}.select &it[1] == 2).to eq({b:2})
+    end
+
+    it "presents `key` accessor" do
+      expect({a: 1, b:2}.select &it.key == :b).to eq({b:2})
+    end
+
+    it "presents `val` accessor" do
+      expect({a: 1, b:2}.select &it.val == 2).to eq({b:2})
+    end
   end
 
 
