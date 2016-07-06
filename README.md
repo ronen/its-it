@@ -143,9 +143,5 @@ Release Notes
 * 1.1.1 Remove dependency on BlankSlate
 
 This gem is orignally based on Jay Philips'
-[methodphitamine](https://github.com/jicksta/methodphitamine) gem. It has been
-updated to be compatible with ruby 1.9 and gemspec, added case statement
-support, renamed its-it, and installed on [rubygems.org](http://rubygems.org).
- Unlike methodphitamine, this gem includes only `its` and `it`, not the
-"maybe" monad.
+[methodphitamine](https://github.com/jicksta/methodphitamine) gem. It has been made available on [rubygems.org](http://rubygems.org), and updated over the years.
 
