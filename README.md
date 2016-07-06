@@ -130,7 +130,7 @@ gem "its-it"
 
 ## Compatibility
 
-Tested on MRI ruby 1.9.3, 2.0.0 and 2.2.3
+Tested on MRI ruby 1.9.3, 2.1.9, 2.2.5, and 2.3.1
 
 (MRI ruby 1.8.7 was supported up through version 1.1.1)
 
