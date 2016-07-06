@@ -29,7 +29,7 @@ describe ItsIt::It do
   end
   
   it "should chain methods" do
-    expect(it.reverse.swapcase.succ).to eq("TSET A SI SIHu")
+    expect((it.reverse.swapcase.succ).to_proc.call(TestString)).to eq("TSET A SI SIHu")
   end
   
   it "should respond to to_proc()" do
