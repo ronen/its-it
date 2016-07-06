@@ -19,19 +19,18 @@ describe ItsIt::It do
   it "should work with a simple method using ===" do
     expect((it.length) === TestString).to eq(TestString.length)
   end
-  
+
   it "should work with arguments" do
     expect((it.sub(/test/, 'kumquat')).call(TestString)).to eq('This is a kumquat')
   end
-  
   it "should work with a block" do
     expect((it.sub(/test/) {"balloon"}).to_proc.call(TestString)).to eq('This is a balloon')
   end
-  
+
   it "should chain methods" do
     expect((it.reverse.swapcase.succ).to_proc.call(TestString)).to eq("TSET A SI SIHu")
   end
-  
+
   it "should respond to to_proc()" do
     expect(it).to respond_to(:to_proc)
   end
@@ -48,15 +47,15 @@ describe ItsIt::It do
 
   context "hash comprehension" do
     it "presents `key` accessor" do
-      expect({a: 1, b:2}.select &it.key == :b).to eq({b:2})
+      expect({a: 1, b:2}.select(&(it.key == :b))).to eq({b:2})
     end
 
     it "presents `value` accessor" do
-      expect({a: 1, b:2}.select &it.value == 2).to eq({b:2})
+      expect({a: 1, b:2}.select(&(it.value == 2))).to eq({b:2})
     end
 
     it "presents as an array" do
-      expect({a: 1, b:2}.select &it[1] == 2).to eq({b:2})
+      expect({a: 1, b:2}.select(&(it[1] == 2))).to eq({b:2})
     end
 
   end
@@ -71,7 +70,7 @@ describe ItsIt::It do
       end
     end
   end
-  
+
   it "should not queue the method respond_to? when given :to_proc as an arg" do
     expect(it.respond_to? :to_proc).to be_true
   end
