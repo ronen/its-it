@@ -47,17 +47,18 @@ describe ItsIt::It do
   end
 
   context "hash comprehension" do
-    it "presents element as an array" do
-      expect({a: 1, b:2}.select &it[1] == 2).to eq({b:2})
-    end
-
     it "presents `key` accessor" do
       expect({a: 1, b:2}.select &it.key == :b).to eq({b:2})
     end
 
-    it "presents `val` accessor" do
-      expect({a: 1, b:2}.select &it.val == 2).to eq({b:2})
+    it "presents `value` accessor" do
+      expect({a: 1, b:2}.select &it.value == 2).to eq({b:2})
     end
+
+    it "presents as an array" do
+      expect({a: 1, b:2}.select &it[1] == 2).to eq({b:2})
+    end
+
   end
 
 

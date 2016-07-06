@@ -27,7 +27,7 @@ module ItsIt
       def key
         self[0]
       end
-      def val
+      def value
         self[1]
       end
     end
