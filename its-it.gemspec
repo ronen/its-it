@@ -40,7 +40,7 @@ for ruby 1.9 and gemspec compatibility and adding the case statement functionali
   s.add_development_dependency 'rspec', "~> 3.0"
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'simplecov'
-  s.add_development_dependency 'simplecov-gem-adapter'
+  s.add_development_dependency 'simplecov-gem-profile'
 
 end
 
