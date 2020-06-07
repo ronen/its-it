@@ -130,7 +130,9 @@ gem "its-it"
 
 ## Compatibility
 
-Tested on MRI ruby 1.9.3, 2.1.9, 2.2.5, and 2.3.1
+Tested on MRI ruby 2.7.1
+
+(MRI ruby 1.9.3, 2.1.9, 2.2.5, and 2.3.1 were supported up through version 1.3.0)
 
 (MRI ruby 1.8.7 was supported up through version 1.1.1)
 
@@ -138,6 +140,7 @@ Tested on MRI ruby 1.9.3, 2.1.9, 2.2.5, and 2.3.1
 
 Release Notes
 
+* 2.0.0 Switch to Ruby 2.7 keyword syntax.  No other breaking changes.
 * 1.3.0 Add `#key` and `#value` for Hash comprehensions; plus minor internal cleanup.
 * 1.2.1 Don't leak all of ItsIt into main, just ItsIt::Kernel.  Thanks to [klg](https://github.com/kjg)
 * 1.2.0 Add support for Hash comprehensions; drop support for ruby 1.8.7
