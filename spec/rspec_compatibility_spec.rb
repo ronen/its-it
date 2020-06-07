@@ -13,6 +13,6 @@ describe "RSpec compatibility" do
   end
   
   it "should work with RSpec's old :should syntax" do
-    [1,2,3].each &it.should(be_kind_of(Fixnum))
+    [1,2,3].each &it.should(be_kind_of(Integer))
   end
 end
