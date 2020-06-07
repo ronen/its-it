@@ -25,6 +25,7 @@ for ruby 1.9 and gemspec compatibility and adding the case statement functionali
     "LICENSE.txt",
   ]
 
+  s.required_ruby_version = '~> 2.7'
   s.required_rubygems_version = Gem::Requirement.new('>= 1.3.7')
   s.rubygems_version = '1.3.7'
   s.specification_version = 3

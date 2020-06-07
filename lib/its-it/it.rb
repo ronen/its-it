@@ -18,8 +18,8 @@ module ItsIt
       @queue = []
     end
     
-    def method_missing(method, *args, &block)
-      @queue << [method, args, block] unless method == :respond_to? and [:to_proc, :===].include?(args.first.to_sym)
+    def method_missing(method, *args, **kw, &block)
+      @queue << [method, args, kw, block] unless method == :respond_to? and [:to_proc, :===].include?(args.first.to_sym)
       self
     end
 
@@ -38,7 +38,7 @@ module ItsIt
         when 1 then obj = obj.shift     # array comprehension, gets one arg
         when 2 then obj.extend(KeyValAccessors) # hash comprehension, gets two args
         end
-        @queue.inject(obj) { |chain,(method, args,block)| chain.send(method, *args, &block) }
+        @queue.inject(obj) { |chain,(method, args, kw, block)| chain.send(method, *args, **kw, &block) }
       end
     end
 
