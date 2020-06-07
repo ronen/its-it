@@ -23,6 +23,11 @@ describe ItsIt::It do
   it "should work with arguments" do
     expect((it.sub(/test/, 'kumquat')).call(TestString)).to eq('This is a kumquat')
   end
+
+  it "should work with keyword arguments" do
+    expect((it.lines(chomp:true)).call(TestString + "\n")).to eq([TestString])
+  end
+
   it "should work with a block" do
     expect((it.sub(/test/) {"balloon"}).to_proc.call(TestString)).to eq('This is a balloon')
   end
