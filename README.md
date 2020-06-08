@@ -8,7 +8,6 @@ calls. This is handy for list comprehension and case statements.
 
 [![Gem Version](https://badge.fury.io/rb/its-it.png)](http://badge.fury.io/rb/its-it)
 [![Build Status](https://secure.travis-ci.org/ronen/its-it.png)](http://travis-ci.org/ronen/its-it)
-[![Dependency Status](https://gemnasium.com/ronen/its-it.png)](https://gemnasium.com/ronen/its-it)
 
 ## List Comprehension
 
